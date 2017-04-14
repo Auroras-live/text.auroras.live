@@ -1,0 +1,38 @@
+<html>
+
+<head>
+    <title>Auroras.live Text Version</title>
+    <style>
+       th {
+         text-align: left;
+       }
+    </style>
+</head>
+
+<body>
+    <h1>Aurora Information</h1>
+    <p>Powered by <a href="http://auroras.live">Auroras.live</a></p>
+    <table id="results"></table>
+    <p>Change the timezone by appending <code>?tz=[offset in minutes]</code> to this URL</p>
+    <p>Need more info? Check out <a href='http://auroras.live'>Auroras.live</a></p>
+</body>
+<script>
+    function aurorasLive(data) {
+        var res = ""
+        res += "<tr><th>Bz:</td><td>" + data.bz + " (" + data.colour.bz + ")</td></tr>"
+        res += "<tr><th>Speed:</td><td>" + data.speed + " (" + data.colour.speed + ")</td></tr>"
+        res += "<tr><th>Density:</td><td>" + data.density + " (" + data.colour.density + ")</td></tr>"
+        res += "<tr><th>Kp:</td><td>" + data.kp + " (" + data.colour.kp + ")</td></tr>"
+        res += "<tr><th>Kp 1 hour:</td><td>" + data.kp1hour + " (" + data.colour.kp1hour + ")</td></tr>"
+        res += "<tr><th>Kp 4 hour:</td><td>" + data.kp4hour + " (" + data.colour.kp4hour + ")</td></tr>"
+        res += "<tr><th>Retrieved:</td><td>" + data.date + "</td></tr>"
+        document.getElementById("results").innerHTML = res
+    }
+
+    var script = document.createElement('script');
+    script.src = 'https://api.auroras.live/v1/?type=ace&data=all&format=jsonp&' + location.search.match(/tz=-?\d+/)
+
+    document.getElementsByTagName('head')[0].appendChild(script);
+</script>
+
+</html>
